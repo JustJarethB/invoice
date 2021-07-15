@@ -119,7 +119,7 @@ SN38 1NW`,
 }
 
 const LineItem = ({ index, item = {}, onChange }) => (
-    < div className={`flex ${index % 2 && "bg-gray-100"}`} >
+    <div className={`flex ${index % 2 && "bg-gray-100"}`} >
         <div className="p-1 w-1/6">
             <TextInput className="w-full font-bold" value={item.description} onChange={(v) => onChange({ description: v })} />
         </div>
@@ -127,18 +127,18 @@ const LineItem = ({ index, item = {}, onChange }) => (
             <TextInput className="w-full font-bold" value={item.qty} onChange={(v) => onChange({ qty: v })} />
         </div>
         <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" value={item.unitPrice} onChange={(v) => onChange({ unitPrice: v })} />
+            <TextInput className="w-full font-bold" prefix="£" value={item.unitPrice} onChange={(v) => onChange({ unitPrice: v })} />
         </div>
         <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" value={item.vatRate} onChange={(v) => onChange({ vatRate: v })} />
+            <TextInput className="w-full font-bold" prefix="%" value={item.vatRate * 100 || undefined} onChange={(v) => onChange({ vatRate: v / 100 })} />
         </div>
         <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" value={(item.qty * item.unitPrice * item.vatRate) || 0} />
+            <TextInput className="w-full font-bold" prefix="£" value={(item.qty * item.unitPrice * item.vatRate) || undefined} />
         </div>
         <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" value={(item.qty * item.unitPrice) || 0} />
+            <TextInput className="w-full font-bold" prefix="£" value={(item.qty * item.unitPrice) || undefined} />
         </div>
-    </div >
+    </div>
 )
 
 const Address = ({ address, onChange, className = 0, title }) => (
