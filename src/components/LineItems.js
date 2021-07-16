@@ -1,5 +1,8 @@
 import React from "react";
 import TextInput from "components/TextInput";
+import SelectInput from "components/SelectInput";
+
+const getVatRates = () => ([{ label: "20", value: .2 }, { label: "5", value: .05 }, { label: "N/A", value: 0 }])
 
 export default ({ data, onChange }) => (
     <div className="p-2">
@@ -30,8 +33,11 @@ const LineItem = ({ index, item = {}, onChange }) => (
             <TextInput className="w-full font-bold" prefix="£" value={item.unitPrice} onChange={(v) => onChange({ unitPrice: v })} />
         </div>
         <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" prefix="%" value={item.vatRate * 100 || undefined} onChange={(v) => onChange({ vatRate: v / 100 })} />
+            <SelectInput className="w-full font-bold" prefix="%" value={item.vatRate} options={getVatRates()} onChange={(v) => onChange({ vatRate: v })} />
         </div>
+        {/* <div className="p-1 w-1/6">
+            <TextInput className="w-full font-bold" prefix="%" value={item.vatRate * 100 || undefined} onChange={(v) => onChange({ vatRate: v / 100 })} />
+        </div> */}
         <div className="p-1 w-1/6">
             <TextInput className="w-full font-bold" prefix="£" value={(item.qty * item.unitPrice * item.vatRate) || undefined} />
         </div>
