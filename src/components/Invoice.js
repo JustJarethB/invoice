@@ -1,15 +1,15 @@
 import React from 'react';
 import TextInput from 'components/TextInput';
+import Address from 'components/Address';
+import LineItems from 'components/LineItems';
+import InvoiceMeta from 'components/InvoiceMeta';
 
-const setLineItem = currentState => id => data => {
-    // console.log(id, data, currentState);
-    const line = { ...currentState[id], ...data };
-    const newState = [...currentState];
-    newState[id] = line;
-    // console.log(newState)
-    return newState;
-
-}
+const newLine = () => ({
+    description: undefined,
+    qty: undefined,
+    unitPrice: undefined,
+    vatRate: undefined
+})
 
 export default class extends React.PureComponent {
     constructor() {
@@ -18,7 +18,7 @@ export default class extends React.PureComponent {
             id: 1,
             date: new Date().toLocaleDateString(),
             logo: { url: "//cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png" },
-            lineItems: [],
+            lineItems: [newLine()],
             from: {
                 name: 'Jareth Bower',
                 address: 'London School of Theology, Green Lane',
@@ -45,32 +45,54 @@ SN38 1NW`,
                 }
             }
         }
+        this.updateLineItem();
     }
+
+    componentDidUpdate() {
+        const { state } = this;
+        const { lineItems } = state;
+        const lastLine = lineItems[lineItems.length - 1];
+        const hasContent = Object.keys(lastLine).map(k => lastLine[k]).filter(v => !!v).length;
+        if (hasContent) {
+            this.updateLineItem()
+        }
+    }
+
+    updateLineItem(newState = {}) {
+        const { state } = this;
+        const newLineItems = [...state.lineItems];
+        const { id, data } = newState;
+        if (id !== undefined) {
+            newLineItems[id] = { ...newLineItems[id], ...data };
+            this.setState({ lineItems: newLineItems });
+            return true;
+        }
+        newLineItems.push(newLine())
+        this.setState({ lineItems: newLineItems });
+        return false;
+    }
+
 
     render() {
         const { state } = this;
-        console.log("***STATE***")
-        console.log(state)
-        console.log("***STATE***")
-        const { from, to, id, date, logo, payment, lineItems } = state;
-        const setLineItemState = setLineItem(lineItems);
+        const { from, to, id, date, logo, payment, lineItems, adjustments = 0 } = state;
+        const subTotal = lineItems.map(item => (item.qty * item.unitPrice) || 0).reduce((p, c) => p + c, 0);
+        const vat = lineItems.map(item => (item.qty * item.unitPrice * item.vatRate) || 0).reduce((p, c) => p + c, 0);
         return (
             <div className="container mx-auto shadow-xl min-h-screen bg-gray-50 p-8">
                 <div className="flex">
-                    <div className="w-1/2 p-2"><img alt="logo" src={logo.url} className="w-1/2" /></div>
+                    <div className="w-1/2 p-2"><img alt="logo" src={logo.url} style={{ maxHeight: "80px" }} /></div>
                     <div className="w-1/2">
-                        <div className="p-2">
-                            <div className="p-2 w-full ring-4 ring-gray-300 rounded-sm">
-                                <div className="flex items-center">
-                                    <p className="font-bold text-lg px-2">Invoice #</p>
-                                    <TextInput value={id} onChange={v => this.setState({ id: v })} />
-                                </div>
-                                <div className="flex items-center">
-                                    <p className="font-bold text-lg px-2">Date</p>
-                                    <TextInput value={date} onChange={v => this.setState({ date: v })} />
-                                </div>
-                            </div>
-                        </div>
+                        <InvoiceMeta id={id} date={date} onChange={this.setState} />
+                    </div>
+                </div>
+                <div className="flex justify-between">
+                    <Address title='From:' address={from} onChange={d => this.setState({ from: { ...from, ...d } })} />
+                    <Address title='To:' address={to} onChange={d => this.setState({ to: { ...to, ...d } })} />
+                </div>
+                <LineItems data={lineItems} onChange={(o) => this.updateLineItem(o)} />
+                <div className="w-full flex">
+                    <div className="w-1/2">
                         <div className="p-2">
                             <div className="p-2 w-full ring-4 ring-gray-300 rounded-sm">
                                 <h2>Payment:</h2>
@@ -93,24 +115,30 @@ SN38 1NW`,
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="flex justify-between">
-                    <Address title='From:' type="from" address={from} onChange={d => this.setState({ from: { ...from, ...d } })} />
-                    <Address title='To:' type="to" address={to} onChange={d => this.setState({ to: { ...to, ...d } })} />
-                </div>
-                <div className="p-2">
-                    <div className="pb-2 flex">
-                        <div className="p-2 w-1/6 font-bold">Description</div>
-                        <div className="p-2 w-1/6 font-bold">Quantity</div>
-                        <div className="p-2 w-1/6 font-bold">Unit Price</div>
-                        <div className="p-2 w-1/6 font-bold">VAT Rate</div>
-                        <div className="p-2 w-1/6 font-bold">VAT</div>
-                        <div className="p-2 w-1/6 font-bold">Total</div>
-                    </div>
-                    <div className="ring-4 ring-gray-300 rounded-sm">
-                        {/* TODO: fix setState */}
-                        {lineItems.map((l, i) => <LineItem index={i} item={l} onChange={data => this.setState({ lineItems: setLineItemState(i)(data) })} />)}
-                        <LineItem index={lineItems.length} onChange={data => this.setState({ lineItems: setLineItemState(lineItems.length)(data) })} />
+                    <div className="w-1/2">
+                        <div className="p-2">
+                            <div className="p-2 w-full ring-4 ring-gray-300 rounded-sm">
+                                <h2>Totals:</h2>
+                                <div className="p-2">
+                                    <div className="flex justify-between">
+                                        <p className="font-bold text-lg px-2">Sub Total</p>
+                                        <TextInput disabled className="w-1/2 text-gray-500" prefix="£" value={subTotal} />
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <p className="font-bold text-lg px-2">VAT</p>
+                                        <TextInput className="w-1/2 text-gray-500" prefix="£" value={vat} />
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <p className="font-bold text-lg px-2">Adjustments</p>
+                                        <TextInput className="w-1/2 text-gray-500" onChange={v => this.setState({ adjustments: parseFloat(v, 10) })} prefix="£" value={adjustments} />
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <p className="font-bold text-lg px-2">Total</p>
+                                        <TextInput className="w-1/2" prefix="£" value={subTotal + adjustments} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -118,36 +146,3 @@ SN38 1NW`,
     }
 }
 
-const LineItem = ({ index, item = {}, onChange }) => (
-    <div className={`flex ${index % 2 && "bg-gray-100"}`} >
-        <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" value={item.description} onChange={(v) => onChange({ description: v })} />
-        </div>
-        <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" value={item.qty} onChange={(v) => onChange({ qty: v })} />
-        </div>
-        <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" prefix="£" value={item.unitPrice} onChange={(v) => onChange({ unitPrice: v })} />
-        </div>
-        <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" prefix="%" value={item.vatRate * 100 || undefined} onChange={(v) => onChange({ vatRate: v / 100 })} />
-        </div>
-        <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" prefix="£" value={(item.qty * item.unitPrice * item.vatRate) || undefined} />
-        </div>
-        <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" prefix="£" value={(item.qty * item.unitPrice) || undefined} />
-        </div>
-    </div>
-)
-
-const Address = ({ address, onChange, className = 0, title }) => (
-    <div className={` w-full md:w-1/2 ${className} p-2`}>
-        <div className="w-full ring-4 ring-gray-300 rounded-sm p-2">
-            <h2>{title}</h2>
-            <TextInput value={address.name} className="text-2xl pb-8 w-full px-2 font-bold" placeholder="Name" onChange={v => onChange({ name: v })} />
-            <TextInput value={address.address} className="w-full px-2 font-bold" placeholder="Name" onChange={v => onChange({ address: v })} />
-            <TextInput value={address.postcode} className="w-full px-2 font-bold" placeholder="Name" onChange={v => onChange({ postcode: v })} />
-        </div>
-    </div>
-)
