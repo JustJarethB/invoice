@@ -4,6 +4,8 @@ import Address from 'components/Address';
 import LineItems from 'components/LineItems';
 import InvoiceMeta from 'components/InvoiceMeta';
 
+import { ensureFutureCurrency, formatCurrency } from 'utils';
+
 const newLine = () => ({
     description: undefined,
     qty: undefined,
@@ -122,19 +124,19 @@ SN38 1NW`,
                                 <div className="p-2">
                                     <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">Sub Total</p>
-                                        <TextInput disabled className="w-1/2 text-gray-500" prefix="£" value={subTotal} />
+                                        <TextInput disabled className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(subTotal)} />
                                     </div>
                                     <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">VAT</p>
-                                        <TextInput className="w-1/2 text-gray-500" prefix="£" value={vat} />
+                                        <TextInput className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(vat)} />
                                     </div>
                                     <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">Adjustments</p>
-                                        <TextInput className="w-1/2 text-gray-500" onChange={v => this.setState({ adjustments: parseFloat(v, 10) })} prefix="£" value={adjustments} />
+                                        <TextInput className="w-1/2 text-gray-500" onChange={v => this.setState({ adjustments: ensureFutureCurrency(v) })} prefix="£" value={adjustments} />
                                     </div>
                                     <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">Total</p>
-                                        <TextInput className="w-1/2" prefix="£" value={subTotal + adjustments} />
+                                        <TextInput className="w-1/2" prefix="£" value={formatCurrency(subTotal + parseFloat(adjustments, 10))} />
                                     </div>
                                 </div>
                             </div>
