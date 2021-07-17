@@ -83,7 +83,7 @@ SN38 1NW`,
                 <div className="flex">
                     <div className="w-1/2 p-2"><img alt="logo" src={logo.url} style={{ maxHeight: "80px" }} /></div>
                     <div className="w-1/2">
-                        <InvoiceMeta id={id} date={date} onChange={this.setState} />
+                        <InvoiceMeta id={id} date={date} onChange={s => this.setState(s)} />
                     </div>
                 </div>
                 <div className="flex justify-between">
