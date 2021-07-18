@@ -32,7 +32,7 @@ const LineItem = ({ index, item = {}, onChange, className }) => (
             <TextInput className="w-full font-bold" value={item.qty} onChange={(v) => onChange({ qty: v })} />
         </div>
         <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" prefix="£" value={ensureFutureCurrency(item.unitPrice)} onChange={(v) => onChange({ unitPrice: v })} />
+            <TextInput className="w-full font-bold" prefix="£" value={(item.unitPrice)} onChange={(v) => onChange({ unitPrice: ensureFutureCurrency(v) })} />
         </div>
         <div className="p-1 w-1/6">
             <SelectInput className="w-full font-bold" prefix="%" value={item.vatRate} options={getVatRates()} onChange={(v) => onChange({ vatRate: v })} />
