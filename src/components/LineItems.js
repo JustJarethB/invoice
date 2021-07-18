@@ -17,14 +17,14 @@ export default ({ data, onChange }) => (
             <div className="p-2 w-1/6 font-bold">Total</div>
         </div>
         <div className="ring-4 ring-gray-300 rounded-sm">
-            {data.map((l, i) => <LineItem index={i} item={l} onChange={d => onChange({ id: i, data: d })} />)}
+            {data.map((l, i) => <LineItem index={i} item={l} onChange={d => onChange({ id: i, data: d })} className={(i === data.length - 1) ? "print:hidden" : ""} />)}
         </div>
     </div>
 )
 
 
-const LineItem = ({ index, item = {}, onChange }) => (
-    <div className={`flex ${index % 2 && "bg-gray-100"}`} >
+const LineItem = ({ index, item = {}, onChange, className }) => (
+    <div className={`flex ${index % 2 && "bg-gray-100"} ${className}`} >
         <div className="p-1 w-1/6">
             <TextInput className="w-full font-bold" value={item.description} onChange={(v) => onChange({ description: v })} />
         </div>
