@@ -21,6 +21,7 @@ export default class extends React.PureComponent {
             date: new Date().toLocaleDateString(),
             logo: { url: "//cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png" },
             lineItems: [newLine()],
+            purchaseOrder: '---',
             from: {
                 name: 'Jareth Bower',
                 address: 'London School of Theology, Green Lane',
@@ -77,7 +78,7 @@ SN38 1NW`,
 
     render() {
         const { state } = this;
-        const { from, to, id, date, logo, payment, lineItems, adjustments = 0 } = state;
+        const { from, to, id, date, logo, payment, lineItems, adjustments, purchaseOrder = 0 } = state;
         const subTotal = lineItems.map(item => (item.qty * item.unitPrice) || 0).reduce((p, c) => p + c, 0);
         const vat = lineItems.map(item => (item.qty * item.unitPrice * item.vatRate) || 0).reduce((p, c) => p + c, 0);
         return (
@@ -85,7 +86,7 @@ SN38 1NW`,
                 <div className="flex">
                     <div className="w-1/2 p-2"><img alt="logo" src={logo.url} style={{ maxHeight: "80px" }} /></div>
                     <div className="w-1/2">
-                        <InvoiceMeta id={id} date={date} onChange={s => this.setState(s)} />
+                        <InvoiceMeta id={id} date={date} purchaseOrder={purchaseOrder} onChange={s => this.setState(s)} />
                     </div>
                 </div>
                 <div className="flex justify-between">
