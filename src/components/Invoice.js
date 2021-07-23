@@ -144,14 +144,6 @@ SN38 1NW`,
                         </div>
                     </div>
                 </div>
-                <div className="print:hidden">
-                    <div className="p-2 w-full flex justify-end">
-                        <div className="">
-
-                            <button className="p-2 px-4 rounded-lg hover:bg-gray-600 ring-4 ring-white hover:ring-gray-900 bg-gray-700 text-white font-bold" type="button" onClick={window.print}>Print</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         );
     }
