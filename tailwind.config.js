@@ -9,7 +9,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      ringColor: ['responsive', 'dark', 'focus-within', 'focus', 'hover']
+    },
   },
   plugins: [],
 }
