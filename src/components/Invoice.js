@@ -103,30 +103,12 @@ export default class extends React.PureComponent {
                             <div className="p-2 w-full ring-4 ring-gray-300 rounded-sm">
                                 <h2>Payment:</h2>
                                 <div className="p-2">
-                                    <div className="flex w-full justify-between">
-                                        <p className="self-center font-bold text-lg px-2">Terms</p>
-                                        <TextInput className="w-1/2" value={payment.terms} onChange={v => this.setState(() => ({ payment: { ...payment, terms: v } }))} />
-                                    </div>
-                                    <div className="flex w-full justify-between">
-                                        <p className="self-center font-bold text-lg px-2">Sort Code</p>
-                                        <TextInput className="w-1/2" value={payment.method.sortCode} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, sortCode: v } } }))} />
-                                    </div>
-                                    <div className="flex w-full justify-between">
-                                        <p className="self-center font-bold text-lg px-2">Acc. Number</p>
-                                        <TextInput className="w-1/2" value={payment.method.number} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, number: v } } }))} />
-                                    </div>
-                                    <div className="flex w-full justify-between">
-                                        <p className="font-bold text-lg px-2">Bank Name</p>
-                                        <TextInput className="w-1/2" value={payment.method.bankName} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, bankName: v } } }))} />
-                                    </div>
-                                    <div className="flex w-full justify-between">
-                                        <p className="font-bold text-lg px-2">Contact Email</p>
-                                        <TextInput className="w-1/2" value={emailAddress} onChange={v => this.setState(() => ({ emailAddress: v }))} />
-                                    </div>
-                                    <div className="flex w-full justify-between">
-                                        <p className="font-bold text-lg px-2">Contact Number</p>
-                                        <TextInput className="w-1/2" value={phoneNumber} onChange={v => this.setState(() => ({ phoneNumber: v }))} />
-                                    </div>
+                                    <StandardField title="Payment Terms" value={payment.terms} onChange={v => this.setState(() => ({ payment: { ...payment, terms: v } }))} />
+                                    <StandardField title="Sort Code" value={payment.method.sortCode} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, sortCode: v } } }))} />
+                                    <StandardField title="Acc. Number" value={payment.method.number} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, number: v } } }))} />
+                                    <StandardField title="Bank Name" value={payment.method.bankName} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, bankName: v } } }))} />
+                                    <StandardField title="Contact Email" value={emailAddress} onChange={v => this.setState(() => ({ emailAddress: v }))} />
+                                    <StandardField title="Contact Number" value={phoneNumber} onChange={v => this.setState(() => ({ phoneNumber: v }))} />
                                 </div>
                             </div>
                         </div>
@@ -136,26 +118,11 @@ export default class extends React.PureComponent {
                             <div className="p-2 w-full ring-4 ring-gray-300 rounded-sm">
                                 <h2>Totals:</h2>
                                 <div className="p-2">
-                                    <div className="flex justify-between">
-                                        <p className="font-bold text-lg px-2">Services Sub Total</p>
-                                        <TextInput className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(serviceSubTotal)} />
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <p className="font-bold text-lg px-2">Rental Sub Total</p>
-                                        <TextInput className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(rentalSubTotal)} />
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <p className="font-bold text-lg px-2">Expenses Sub Total</p>
-                                        <TextInput className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(expenseSubTotal)} />
-                                    </div>
-                                    {/* <div className="flex justify-between">
-                                        <p className="font-bold text-lg px-2">VAT</p>
-                                        <TextInput className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(vat)} />
-                                    </div> */}
-                                    <div className="flex justify-between">
-                                        <p className="font-bold text-lg px-2">Total</p>
-                                        <TextInput className="w-1/2" prefix="£" value={formatCurrency(serviceSubTotal + rentalSubTotal + expenseSubTotal)} />
-                                    </div>
+                                    <StandardField title="Services Sub Total" prefix="£" className="text-gray-500" value={formatCurrency(serviceSubTotal)} />
+                                    <StandardField title="Rental Sub Total" prefix="£" className="text-gray-500" value={formatCurrency(rentalSubTotal)} />
+                                    <StandardField title="Expenses Sub Total" prefix="£" className="text-gray-500" value={formatCurrency(expenseSubTotal)} />
+                                    {/* <StandardField title="VAT" className="text-gray-500" value={formatCurrency(vat)} /> */}
+                                    <StandardField title="Total" prefix="£" value={formatCurrency(serviceSubTotal + rentalSubTotal + expenseSubTotal)} />
                                 </div>
                             </div>
                         </div>
@@ -166,3 +133,10 @@ export default class extends React.PureComponent {
     }
 }
 
+const StandardField = ({ title, prefix, suffix, value, onChange, className }) => (
+    <div className="flex justify-between">
+        <p className="font-bold text-lg px-2">{title}</p>
+        <TextInput className={`w-1/2 ${className}`} {...{ prefix, suffix, value, onChange }} />
+    </div>
+
+)
