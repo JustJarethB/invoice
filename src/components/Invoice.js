@@ -78,7 +78,7 @@ export default class extends React.PureComponent {
 
     render() {
         const { state } = this;
-        const { from, to, id, date, logo, payment, lineItems, adjustments, emailAddress, phoneNumber, purchaseOrder = 0 } = state;
+        const { from, to, id, date, logo, payment, lineItems, emailAddress, phoneNumber, purchaseOrder = 0 } = state;
         const subTotal = lineItems.map(item => (item.qty * item.unitPrice) || 0).reduce((p, c) => p + c, 0);
         const serviceSubTotal = subTotal;
         const rentalSubTotal = 0;
@@ -151,10 +151,6 @@ export default class extends React.PureComponent {
                                     {/* <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">VAT</p>
                                         <TextInput className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(vat)} />
-                                    </div> */}
-                                    {/* <div className="flex justify-between">
-                                        <p className="font-bold text-lg px-2">Adjustments</p>
-                                        <TextInput className="w-1/2 text-gray-500" onChange={v => this.setState({ adjustments: ensureFutureCurrency(v) })} prefix="£" value={adjustments} />
                                     </div> */}
                                     <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">Total</p>
