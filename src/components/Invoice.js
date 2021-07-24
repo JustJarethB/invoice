@@ -40,12 +40,7 @@ export default class extends React.PureComponent {
                 terms: 'NET 30',
                 method: {
                     type: 'BACS',
-                    bankDetails: `Nationwide Building Society
-Nationwide House
-Pipers Way
-Swindon
-Wiltshire
-SN38 1NW`,
+                    bankName: `Nationwide Building Society`,
                     sortCode: '07-04-36',
                     number: '15746644',
                 }
@@ -119,7 +114,7 @@ SN38 1NW`,
                                 </div>
                                 <div className="flex px-2 w-full justify-between">
                                     <p className="font-bold text-lg px-2">Bank Name</p>
-                                    <TextInput className="w-1/2" value={payment.method.bankDetails} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, bankDetails: v } } }))} />
+                                    <TextInput className="w-1/2" value={payment.method.bankName} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, bankName: v } } }))} />
                                 </div>
                             </div>
                         </div>
