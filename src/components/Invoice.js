@@ -4,13 +4,16 @@ import Address from 'components/Address';
 import LineItems from 'components/LineItems';
 import InvoiceMeta from 'components/InvoiceMeta';
 
-import { ensureFutureCurrency, formatCurrency } from 'utils';
+import { formatCurrency } from 'utils';
+// import { ensureFutureCurrency, formatCurrency } from 'utils';
 
 const newLine = () => ({
+    date: undefined,
+    name: undefined,
     description: undefined,
     qty: undefined,
     unitPrice: undefined,
-    vatRate: undefined
+    vatRate: undefined,
 })
 
 export default class extends React.PureComponent {
@@ -80,7 +83,10 @@ SN38 1NW`,
         const { state } = this;
         const { from, to, id, date, logo, payment, lineItems, adjustments, purchaseOrder = 0 } = state;
         const subTotal = lineItems.map(item => (item.qty * item.unitPrice) || 0).reduce((p, c) => p + c, 0);
-        const vat = lineItems.map(item => (item.qty * item.unitPrice * item.vatRate) || 0).reduce((p, c) => p + c, 0);
+        const serviceSubTotal = subTotal;
+        const rentalSubTotal = 0;
+        const expenseSubTotal = 0;
+        // const vat = lineItems.map(item => (item.qty * item.unitPrice * item.vatRate) || 0).reduce((p, c) => p + c, 0);
         return (
             <div className="container mx-auto shadow-xl min-h-screen bg-gray-50 p-8">
                 <div className="flex">
@@ -124,17 +130,25 @@ SN38 1NW`,
                                 <h2>Totals:</h2>
                                 <div className="p-2">
                                     <div className="flex justify-between">
-                                        <p className="font-bold text-lg px-2">Sub Total</p>
-                                        <TextInput disabled className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(subTotal)} />
+                                        <p className="font-bold text-lg px-2">Services Sub Total</p>
+                                        <TextInput disabled className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(serviceSubTotal)} />
                                     </div>
                                     <div className="flex justify-between">
+                                        <p className="font-bold text-lg px-2">Rental Sub Total</p>
+                                        <TextInput disabled className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(rentalSubTotal)} />
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <p className="font-bold text-lg px-2">Expenses Sub Total</p>
+                                        <TextInput disabled className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(expenseSubTotal)} />
+                                    </div>
+                                    {/* <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">VAT</p>
                                         <TextInput className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(vat)} />
-                                    </div>
-                                    <div className="flex justify-between">
+                                    </div> */}
+                                    {/* <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">Adjustments</p>
                                         <TextInput className="w-1/2 text-gray-500" onChange={v => this.setState({ adjustments: ensureFutureCurrency(v) })} prefix="£" value={adjustments} />
-                                    </div>
+                                    </div> */}
                                     <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">Total</p>
                                         <TextInput className="w-1/2" prefix="£" value={formatCurrency(subTotal + parseFloat(adjustments, 10))} />
