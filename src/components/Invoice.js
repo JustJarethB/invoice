@@ -37,7 +37,7 @@ export default class extends React.PureComponent {
                 postcode: 'WD24 7GP'
             },
             payment: {
-                terms: '30 Days',
+                terms: 'NET 30',
                 method: {
                     type: 'BACS',
                     bankDetails: `Nationwide Building Society
