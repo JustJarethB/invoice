@@ -103,27 +103,27 @@ export default class extends React.PureComponent {
                             <div className="p-2 w-full ring-4 ring-gray-300 rounded-sm">
                                 <h2>Payment:</h2>
                                 <div className="p-2">
-                                    <div className="flex px-2 w-full justify-between">
+                                    <div className="flex w-full justify-between">
                                         <p className="self-center font-bold text-lg px-2">Terms</p>
                                         <TextInput className="w-1/2" value={payment.terms} onChange={v => this.setState(() => ({ payment: { ...payment, terms: v } }))} />
                                     </div>
-                                    <div className="flex px-2 w-full justify-between">
+                                    <div className="flex w-full justify-between">
                                         <p className="self-center font-bold text-lg px-2">Sort Code</p>
                                         <TextInput className="w-1/2" value={payment.method.sortCode} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, sortCode: v } } }))} />
                                     </div>
-                                    <div className="flex px-2 w-full justify-between">
+                                    <div className="flex w-full justify-between">
                                         <p className="self-center font-bold text-lg px-2">Acc. Number</p>
                                         <TextInput className="w-1/2" value={payment.method.number} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, number: v } } }))} />
                                     </div>
-                                    <div className="flex px-2 w-full justify-between">
+                                    <div className="flex w-full justify-between">
                                         <p className="font-bold text-lg px-2">Bank Name</p>
                                         <TextInput className="w-1/2" value={payment.method.bankName} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, bankName: v } } }))} />
                                     </div>
-                                    <div className="flex px-2 w-full justify-between">
+                                    <div className="flex w-full justify-between">
                                         <p className="font-bold text-lg px-2">Contact Email</p>
                                         <TextInput className="w-1/2" value={emailAddress} onChange={v => this.setState(() => ({ emailAddress: v }))} />
                                     </div>
-                                    <div className="flex px-2 w-full justify-between">
+                                    <div className="flex w-full justify-between">
                                         <p className="font-bold text-lg px-2">Contact Number</p>
                                         <TextInput className="w-1/2" value={phoneNumber} onChange={v => this.setState(() => ({ phoneNumber: v }))} />
                                     </div>
