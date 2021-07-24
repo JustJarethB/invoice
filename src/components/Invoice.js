@@ -138,15 +138,15 @@ export default class extends React.PureComponent {
                                 <div className="p-2">
                                     <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">Services Sub Total</p>
-                                        <TextInput disabled className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(serviceSubTotal)} />
+                                        <TextInput className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(serviceSubTotal)} />
                                     </div>
                                     <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">Rental Sub Total</p>
-                                        <TextInput disabled className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(rentalSubTotal)} />
+                                        <TextInput className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(rentalSubTotal)} />
                                     </div>
                                     <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">Expenses Sub Total</p>
-                                        <TextInput disabled className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(expenseSubTotal)} />
+                                        <TextInput className="w-1/2 text-gray-500" prefix="£" value={formatCurrency(expenseSubTotal)} />
                                     </div>
                                     {/* <div className="flex justify-between">
                                         <p className="font-bold text-lg px-2">VAT</p>
