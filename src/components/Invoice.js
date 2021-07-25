@@ -19,9 +19,10 @@ const newLine = () => ({
 export default class extends React.PureComponent {
     constructor() {
         super();
+        const now = new Date();
         this.state = {
-            id: 1,
-            date: new Date().toLocaleDateString(),
+            id: `${now.getTime()}`.substring(0, 10),
+            date: now.toLocaleDateString(),
             logo: { url: "//cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png" },
             lineItems: [newLine()],
             purchaseOrder: '---',
