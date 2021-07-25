@@ -4,6 +4,8 @@ import Address from 'components/Address';
 import LineItems from 'components/LineItems';
 import InvoiceMeta from 'components/InvoiceMeta';
 
+import Database from 'database';
+
 import { formatCurrency } from 'utils';
 // import { ensureFutureCurrency, formatCurrency } from 'utils';
 
@@ -28,17 +30,18 @@ export default class extends React.PureComponent {
             purchaseOrder: '---',
             emailAddress: 'JustJarethB@gmail.com',
             phoneNumber: '(+44)7 414 464 648',
-            from: {
-                name: 'Jareth Bower',
-                address: 'London School of Theology, Green Lane',
-                postcode: 'HA6 2UW'
-            },
-
-            to: {
-                name: 'Soul Survivor Watford',
-                address: 'Warehouse 5, Greycaine Road',
-                postcode: 'WD24 7GP'
-            },
+            from: Database.getDefaultAddress(),
+            // from: {
+            //     name: 'Jareth Bower',
+            //     address: 'London School of Theology, Green Lane',
+            //     postCode: 'HA6 2UW'
+            // },
+            to: Database.getAllClients()[1].address,
+            // to: {
+            //     name: 'Soul Survivor Watford',
+            //     address: 'Warehouse 5, Greycaine Road',
+            //     postcode: 'WD24 7GP'
+            // },
             payment: {
                 terms: 'NET 30',
                 method: {

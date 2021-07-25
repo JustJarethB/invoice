@@ -7,7 +7,7 @@ export default ({ address, onChange, className = 0, title }) => (
             <h2>{title}</h2>
             <TextInput value={address.name} className="text-2xl pb-8 w-full px-2 font-bold" placeholder="Name" onChange={v => onChange({ name: v })} />
             <TextInput value={address.address} className="w-full px-2 font-bold" placeholder="Name" onChange={v => onChange({ address: v })} />
-            <TextInput value={address.postcode} className="w-full px-2 font-bold" placeholder="Name" onChange={v => onChange({ postcode: v })} />
+            <TextInput value={address.postCode} className="w-full px-2 font-bold" placeholder="Name" onChange={v => onChange({ postCode: v })} />
         </div>
     </div>
 )
