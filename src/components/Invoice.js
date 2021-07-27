@@ -5,7 +5,6 @@ import LineItems from 'components/LineItems';
 import InvoiceMeta from 'components/InvoiceMeta';
 
 import { formatCurrency } from 'utils';
-// import { ensureFutureCurrency, formatCurrency } from 'utils';
 
 const newLine = () => ({
     date: undefined,
@@ -28,18 +27,6 @@ export default class extends React.PureComponent {
             purchaseOrder: '---',
             emailAddress: 'JustJarethB@gmail.com',
             phoneNumber: '(+44)7 414 464 648',
-            // from: Database.getDefaultAddress(),
-            // from: {
-            //     name: 'Jareth Bower',
-            //     address: 'London School of Theology, Green Lane',
-            //     postCode: 'HA6 2UW'
-            // },
-            // to: Database.getAllClients()[1].address,
-            // to: {
-            //     name: 'Soul Survivor Watford',
-            //     address: 'Warehouse 5, Greycaine Road',
-            //     postcode: 'WD24 7GP'
-            // },
             payment: {
                 terms: 'NET 30',
                 method: {
@@ -80,8 +67,21 @@ export default class extends React.PureComponent {
 
     render() {
         const { state } = this;
-        const { id, date, logo, payment, lineItems, emailAddress, phoneNumber, purchaseOrder = 0 } = state;
-        const { from, to, onChange } = this.props;
+        const {
+            id,
+            date,
+            logo,
+            payment,
+            lineItems,
+            emailAddress,
+            phoneNumber,
+            purchaseOrder = 0
+        } = state;
+        const {
+            from,
+            to,
+            onChange
+        } = this.props;
         const subTotal = lineItems.map(item => (item.qty * item.unitPrice) || 0).reduce((p, c) => p + c, 0);
         const serviceSubTotal = subTotal;
         const rentalSubTotal = 0;
