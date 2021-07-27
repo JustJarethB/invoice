@@ -4,8 +4,6 @@ import Address from 'components/Address';
 import LineItems from 'components/LineItems';
 import InvoiceMeta from 'components/InvoiceMeta';
 
-import Database from 'database';
-
 import { formatCurrency } from 'utils';
 // import { ensureFutureCurrency, formatCurrency } from 'utils';
 
@@ -30,13 +28,13 @@ export default class extends React.PureComponent {
             purchaseOrder: '---',
             emailAddress: 'JustJarethB@gmail.com',
             phoneNumber: '(+44)7 414 464 648',
-            from: Database.getDefaultAddress(),
+            // from: Database.getDefaultAddress(),
             // from: {
             //     name: 'Jareth Bower',
             //     address: 'London School of Theology, Green Lane',
             //     postCode: 'HA6 2UW'
             // },
-            to: Database.getAllClients()[1].address,
+            // to: Database.getAllClients()[1].address,
             // to: {
             //     name: 'Soul Survivor Watford',
             //     address: 'Warehouse 5, Greycaine Road',
@@ -82,7 +80,8 @@ export default class extends React.PureComponent {
 
     render() {
         const { state } = this;
-        const { from, to, id, date, logo, payment, lineItems, emailAddress, phoneNumber, purchaseOrder = 0 } = state;
+        const { id, date, logo, payment, lineItems, emailAddress, phoneNumber, purchaseOrder = 0 } = state;
+        const { from, to, onChange } = this.props;
         const subTotal = lineItems.map(item => (item.qty * item.unitPrice) || 0).reduce((p, c) => p + c, 0);
         const serviceSubTotal = subTotal;
         const rentalSubTotal = 0;
@@ -97,8 +96,8 @@ export default class extends React.PureComponent {
                     </div>
                 </div>
                 <div className="flex justify-between">
-                    <Address title='From:' address={from} onChange={d => this.setState({ from: { ...from, ...d } })} />
-                    <Address title='To:' address={to} onChange={d => this.setState({ to: { ...to, ...d } })} />
+                    <Address title='From:' address={from} onChange={d => onChange({ from: { ...from, ...d } })} />
+                    <Address title='To:' address={to} onChange={d => onChange({ to: { ...to, ...d } })} />
                 </div>
                 <LineItems data={lineItems} onChange={(o) => this.updateLineItem(o)} />
                 <div className="w-full flex">
