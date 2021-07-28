@@ -11,9 +11,9 @@ export default class extends React.PureComponent {
     //     super();
     // }
 
-    componentDidMount() {
-        this.updateLineItem();
-    }
+    // componentDidMount() {
+    //     this.updateLineItem();
+    // }
 
     componentDidUpdate() {
         const state = this.props;
