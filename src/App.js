@@ -24,9 +24,9 @@ class App extends React.PureComponent {
         terms: 'NET 30',
         method: {
           type: 'BACS',
-          bankName: `Nationwide Building Society`,
-          sortCode: '07-04-36',
-          number: '15746644',
+          bankName: `Monzo Bank`,
+          sortCode: '04-00-04',
+          number: '44200929',
         }
       }
     }
