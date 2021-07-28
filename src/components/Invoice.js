@@ -4,44 +4,19 @@ import Address from 'components/Address';
 import LineItems from 'components/LineItems';
 import InvoiceMeta from 'components/InvoiceMeta';
 
-import { formatCurrency } from 'utils';
-
-const newLine = () => ({
-    date: undefined,
-    name: undefined,
-    description: undefined,
-    qty: undefined,
-    unitPrice: undefined,
-    vatRate: undefined,
-})
+import { formatCurrency, newLine } from 'utils';
 
 export default class extends React.PureComponent {
-    constructor() {
-        super();
-        const now = new Date();
-        this.state = {
-            id: `${now.getTime()}`.substring(0, 10),
-            date: now.toLocaleDateString(),
-            logo: { url: "//cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png" },
-            lineItems: [newLine()],
-            purchaseOrder: '---',
-            emailAddress: 'JustJarethB@gmail.com',
-            phoneNumber: '(+44)7 414 464 648',
-            payment: {
-                terms: 'NET 30',
-                method: {
-                    type: 'BACS',
-                    bankName: `Nationwide Building Society`,
-                    sortCode: '07-04-36',
-                    number: '15746644',
-                }
-            }
-        }
+    // constructor() {
+    //     super();
+    // }
+
+    componentDidMount() {
         this.updateLineItem();
     }
 
     componentDidUpdate() {
-        const { state } = this;
+        const state = this.props;
         const { lineItems } = state;
         const lastLine = lineItems[lineItems.length - 1];
         const hasContent = Object.keys(lastLine).map(k => lastLine[k]).filter(v => !!v).length;
@@ -51,22 +26,22 @@ export default class extends React.PureComponent {
     }
 
     updateLineItem(newState = {}) {
-        const { state } = this;
+        const state = this.props;
+        const { onChange } = state;
         const newLineItems = [...state.lineItems];
         const { id, data } = newState;
         if (id !== undefined) {
             newLineItems[id] = { ...newLineItems[id], ...data };
-            this.setState({ lineItems: newLineItems });
+            onChange({ lineItems: newLineItems });
             return true;
         }
         newLineItems.push(newLine())
-        this.setState({ lineItems: newLineItems });
+        onChange({ lineItems: newLineItems });
         return false;
     }
 
 
     render() {
-        const { state } = this;
         const {
             id,
             date,
@@ -75,9 +50,7 @@ export default class extends React.PureComponent {
             lineItems,
             emailAddress,
             phoneNumber,
-            purchaseOrder = 0
-        } = state;
-        const {
+            purchaseOrder = 0,
             from,
             to,
             onChange
@@ -92,7 +65,7 @@ export default class extends React.PureComponent {
                 <div className="flex">
                     <div className="w-1/2 p-2"><img alt="logo" src={logo.url} style={{ maxHeight: "80px" }} /></div>
                     <div className="w-1/2">
-                        <InvoiceMeta id={id} date={date} purchaseOrder={purchaseOrder} onChange={s => this.setState(s)} />
+                        <InvoiceMeta id={id} date={date} purchaseOrder={purchaseOrder} onChange={s => onChange(s)} />
                     </div>
                 </div>
                 <div className="flex justify-between">
@@ -106,12 +79,12 @@ export default class extends React.PureComponent {
                             <div className="p-2 w-full ring-4 ring-gray-300 rounded-sm">
                                 <h2>Payment:</h2>
                                 <div className="p-2">
-                                    <StandardField title="Payment Terms" value={payment.terms} onChange={v => this.setState(() => ({ payment: { ...payment, terms: v } }))} />
-                                    <StandardField title="Sort Code" value={payment.method.sortCode} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, sortCode: v } } }))} />
-                                    <StandardField title="Acc. Number" value={payment.method.number} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, number: v } } }))} />
-                                    <StandardField title="Bank Name" value={payment.method.bankName} onChange={v => this.setState(() => ({ payment: { ...payment, method: { ...payment.method, bankName: v } } }))} />
-                                    <StandardField title="Contact Email" value={emailAddress} onChange={v => this.setState(() => ({ emailAddress: v }))} />
-                                    <StandardField title="Contact Number" value={phoneNumber} onChange={v => this.setState(() => ({ phoneNumber: v }))} />
+                                    <StandardField title="Payment Terms" value={payment.terms} onChange={v => onChange(() => ({ payment: { ...payment, terms: v } }))} />
+                                    <StandardField title="Sort Code" value={payment.method.sortCode} onChange={v => onChange(() => ({ payment: { ...payment, method: { ...payment.method, sortCode: v } } }))} />
+                                    <StandardField title="Acc. Number" value={payment.method.number} onChange={v => onChange(() => ({ payment: { ...payment, method: { ...payment.method, number: v } } }))} />
+                                    <StandardField title="Bank Name" value={payment.method.bankName} onChange={v => onChange(() => ({ payment: { ...payment, method: { ...payment.method, bankName: v } } }))} />
+                                    <StandardField title="Contact Email" value={emailAddress} onChange={v => onChange(() => ({ emailAddress: v }))} />
+                                    <StandardField title="Contact Number" value={phoneNumber} onChange={v => onChange(() => ({ phoneNumber: v }))} />
                                 </div>
                             </div>
                         </div>

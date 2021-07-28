@@ -10,4 +10,13 @@ export const ensureFutureCurrency = v => {
     result += regMatch;
     return result;
 }
+
+export const newLine = () => ({
+    date: undefined,
+    name: undefined,
+    description: undefined,
+    qty: undefined,
+    unitPrice: undefined,
+    vatRate: undefined,
+})
 // const regRes = s.match(/0*(-?\d+\.?\d{0,2})/);
