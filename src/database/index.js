@@ -21,7 +21,7 @@ const getAllClients = () => [
     },
 ]
 
-const getDefaultAddress = () => new Address('Jareth Bower', "London School of Theology\nGreen Lane\nNorthwood", "HA6 2UW")
+const getDefaultAddress = () => new Address('Jareth Bower', "26 Hilton Avenue\nDunstable\nBedfordshire", "LU6 3QF")
 
 export default {
     getAllClients,
