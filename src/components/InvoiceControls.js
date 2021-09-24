@@ -1,11 +1,10 @@
 import React from 'react';
 
-export default ({ loadClientAddress }) => (
+export default ({ clients, loadClientAddress }) => (
     <div className="print:hidden sticky top-0 bg-gray-50 shadow-sm z-10">
         <div className="container mx-auto">
             <div className="w-full flex justify-end">
-                <Button onClick={() => loadClientAddress(0)}>SSW</Button>
-                <Button onClick={() => loadClientAddress(1)}>TBNUK</Button>
+                {clients.map((client, i) => <Button onClick={() => loadClientAddress(i)}>{client.displayName}</Button>)}
                 <Button onClick={window.print}>Print</Button>
                 <Button>Save</Button>
             </div>

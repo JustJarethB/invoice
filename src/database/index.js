@@ -19,9 +19,19 @@ const getAllClients = () => [
         address: new Address("VSC", "226 Church Road\nNeasden\nLondon", "NW10 9NR")
 
     },
+    {
+        displayName: "Bobcat TV",
+        defaultTerms: null,
+        address: new Address("Bobcat TV", "12 Roundmead Close\nLoughton\nEssex", "IG10 1QD")
+
+    },
 ]
 
-const getDefaultAddress = () => new Address('Jareth Bower', "26 Hilton Avenue\nDunstable\nBedfordshire", "LU6 3QF")
+const addresses = [
+    new Address('Jareth Bower', "26 Hilton Avenue\nDunstable\nBedfordshire", "LU6 3QF"),
+    new Address('Jareth Bower', "15 Langland Court\nNorthwood\nHillingdon", "HA6 2NH")
+]
+const getDefaultAddress = () => addresses[1]
 
 export default {
     getAllClients,

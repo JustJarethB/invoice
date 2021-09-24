@@ -53,7 +53,7 @@ class App extends React.PureComponent {
     } = this.state;
     return (
       <div className="App bg-gray-50">
-        <InvoiceControls loadClientAddress={v => this.loadClientAddress(v)} />
+        <InvoiceControls clients={Database.getAllClients()} loadClientAddress={v => this.loadClientAddress(v)} />
         <Invoice {...{ from, to, id, date, logo, payment, lineItems, emailAddress, phoneNumber, purchaseOrder }} onChange={v => this.setState(v)} />
       </div>
     );
