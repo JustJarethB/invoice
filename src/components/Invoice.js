@@ -74,7 +74,7 @@ export default class extends React.PureComponent {
                 </div>
                 <LineItems data={lineItems} onChange={(o) => this.updateLineItem(o)} />
                 <div className="w-full flex">
-                    <div className="w-1/2">
+                    <div className="w-2/3">
                         <div className="p-2">
                             <div className="p-2 w-full ring-4 ring-gray-300 rounded-sm">
                                 <h2>Payment:</h2>
@@ -85,20 +85,22 @@ export default class extends React.PureComponent {
                                     <StandardField title="Bank Name" value={payment.method.bankName} onChange={v => onChange(() => ({ payment: { ...payment, method: { ...payment.method, bankName: v } } }))} />
                                     <StandardField title="Contact Email" value={emailAddress} onChange={v => onChange(() => ({ emailAddress: v }))} />
                                     <StandardField title="Contact Number" value={phoneNumber} onChange={v => onChange(() => ({ phoneNumber: v }))} />
+                                    {/* <StandardField title="Additional Information" value="Please reference the invoice id during payment" /> */}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="w-1/2">
+                    <div className="w-1/3">
                         <div className="p-2">
                             <div className="p-2 w-full ring-4 ring-gray-300 rounded-sm">
                                 <h2>Totals:</h2>
                                 <div className="p-2">
-                                    <StandardField title="Services Sub Total" prefix="£" className="text-gray-500" value={formatCurrency(serviceSubTotal)} />
-                                    <StandardField title="Rental Sub Total" prefix="£" className="text-gray-500" value={formatCurrency(rentalSubTotal)} />
-                                    <StandardField title="Expenses Sub Total" prefix="£" className="text-gray-500" value={formatCurrency(expenseSubTotal)} />
-                                    {/* <StandardField title="VAT" className="text-gray-500" value={formatCurrency(vat)} /> */}
-                                    <StandardField title="Total" prefix="£" value={formatCurrency(serviceSubTotal + rentalSubTotal + expenseSubTotal)} />
+                                    <StandardField title="Services" prefix="£" parentClass="text-gray-500" value={formatCurrency(serviceSubTotal)} />
+                                    {/* <StandardField title="Rental" prefix="£" parentClass="text-gray-500" value={formatCurrency(rentalSubTotal)} /> */}
+                                    {/* <StandardField title="Expenses" prefix="£" parentClass="text-gray-500" value={formatCurrency(expenseSubTotal)} /> */}
+                                    {/* <StandardField title="VAT" parentClass="text-gray-500" value={formatCurrency(vat)} /> */}
+                                    <hr className="py-2" />
+                                    <StandardField title="Total" prefix="£" parentClass="" value={formatCurrency(serviceSubTotal + rentalSubTotal + expenseSubTotal)} />
                                 </div>
                             </div>
                         </div>
@@ -109,9 +111,9 @@ export default class extends React.PureComponent {
     }
 }
 
-const StandardField = ({ title, prefix, suffix, value, onChange, className }) => (
-    <div className="flex justify-between">
-        <p className="font-bold text-lg px-2">{title}</p>
+const StandardField = ({ title, prefix, suffix, value, onChange, className, parentClass }) => (
+    <div className={`flex justify-between ${parentClass}`}>
+        <p className="font-bold px-2">{title}</p>
         <TextInput className={`w-1/2 ${className}`} {...{ prefix, suffix, value, onChange }} />
     </div>
 
