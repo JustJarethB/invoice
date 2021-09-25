@@ -55,10 +55,11 @@ export default class extends React.PureComponent {
             to,
             onChange
         } = this.props;
+        const serviceSubTotal = lineItems.filter(item => item.type === "0").map(item => (item.qty * item.unitPrice) || 0).reduce((p, c) => p + c, 0);
+        const rentalSubTotal = lineItems.filter(item => item.type === "1").map(item => (item.qty * item.unitPrice) || 0).reduce((p, c) => p + c, 0);
+        const expenseSubTotal = lineItems.filter(item => item.type === "2").map(item => (item.qty * item.unitPrice) || 0).reduce((p, c) => p + c, 0);
+        // const subTotal = serviceSubTotal + rentalSubTotal + expenseSubTotal;
         const subTotal = lineItems.map(item => (item.qty * item.unitPrice) || 0).reduce((p, c) => p + c, 0);
-        const serviceSubTotal = subTotal;
-        const rentalSubTotal = 0;
-        const expenseSubTotal = 0;
         // const vat = lineItems.map(item => (item.qty * item.unitPrice * item.vatRate) || 0).reduce((p, c) => p + c, 0);
         return (
             <div className="container mx-auto shadow-xl min-h-screen bg-gray-50 p-8 print:text-xs">
@@ -96,11 +97,12 @@ export default class extends React.PureComponent {
                                 <h2>Totals:</h2>
                                 <div className="p-2">
                                     <StandardField title="Services" prefix="£" parentClass="text-gray-500" value={formatCurrency(serviceSubTotal)} />
-                                    {/* <StandardField title="Rental" prefix="£" parentClass="text-gray-500" value={formatCurrency(rentalSubTotal)} /> */}
-                                    {/* <StandardField title="Expenses" prefix="£" parentClass="text-gray-500" value={formatCurrency(expenseSubTotal)} /> */}
+                                    <StandardField title="Rental" prefix="£" parentClass="text-gray-500" value={formatCurrency(rentalSubTotal)} />
+                                    <StandardField title="Expenses" prefix="£" parentClass="text-gray-500" value={formatCurrency(expenseSubTotal)} />
                                     {/* <StandardField title="VAT" parentClass="text-gray-500" value={formatCurrency(vat)} /> */}
                                     <hr className="py-2" />
-                                    <StandardField title="Total" prefix="£" parentClass="" value={formatCurrency(serviceSubTotal + rentalSubTotal + expenseSubTotal)} />
+                                    {/* <StandardField title="Total" prefix="£" parentClass="" value={formatCurrency(serviceSubTotal + rentalSubTotal + expenseSubTotal)} /> */}
+                                    <StandardField title="Total" prefix="£" parentClass="" value={formatCurrency(subTotal)} />
                                 </div>
                             </div>
                         </div>
