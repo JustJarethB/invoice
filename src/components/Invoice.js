@@ -61,7 +61,7 @@ export default class extends React.PureComponent {
         const expenseSubTotal = 0;
         // const vat = lineItems.map(item => (item.qty * item.unitPrice * item.vatRate) || 0).reduce((p, c) => p + c, 0);
         return (
-            <div className="container mx-auto shadow-xl min-h-screen bg-gray-50 p-8">
+            <div className="container mx-auto shadow-xl min-h-screen bg-gray-50 p-8 print:text-xs">
                 <div className="flex">
                     <div className="w-1/2 p-2"><img alt="logo" src={logo.url} style={{ maxHeight: "80px" }} /></div>
                     <div className="w-1/2">
