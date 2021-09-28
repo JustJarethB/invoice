@@ -13,7 +13,7 @@ export default ({ id, date, purchaseOrder, onChange }) => (
                 <TextInput className="w-full" value={date} onChange={v => onChange({ date: v })} />
             </div>
             <div className="flex items-center">
-                <p className="font-bold px-2 whitespace-nowrap">Purchase Order</p>
+                <p className="font-bold px-2 whitespace-nowrap">PO / Reference</p>
                 <TextInput className="w-full" value={purchaseOrder} onChange={v => onChange({ purchaseOrder: v })} />
             </div>
         </div>
