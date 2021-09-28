@@ -33,6 +33,13 @@ class App extends React.PureComponent {
 
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { state } = this;
+    if ((state.id && state.to) && (prevState.id === state.id) && (prevState.to.name === state.to.name)) return;
+    const title = `${state.id || "ID"} ${state.to.name || "Client"}`
+    document.title = title;
+  }
+
 
   loadClientAddress(index) {
     this.setState({ to: Database.getAllClients()[index].address })
