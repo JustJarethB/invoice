@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default ({ clients, loadClientAddress }) => (
+export default ({ clients, loadClientAddress, saveInvoice }) => (
     <div className="print:hidden sticky top-0 bg-gray-50 shadow-sm z-10">
         <div className="container mx-auto">
             <div className="w-full flex justify-end">
                 {clients.map((client, i) => <Button onClick={() => loadClientAddress(i)}>{client.displayName}</Button>)}
                 <Button onClick={window.print}>Print</Button>
-                <Button>Save</Button>
+                <Button onClick={saveInvoice}>Save</Button>
             </div>
         </div>
     </div>

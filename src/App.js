@@ -40,6 +40,10 @@ class App extends React.PureComponent {
     document.title = title;
   }
 
+  saveInvoice() {
+    // const {id, date, lineItems, purchaseOrder} = this.state;
+    Database.saveInvoice({ ...this.state });
+  }
 
   loadClientAddress(index) {
     this.setState({ to: Database.getAllClients()[index].address })
@@ -60,7 +64,7 @@ class App extends React.PureComponent {
     } = this.state;
     return (
       <div className="App bg-gray-50">
-        <InvoiceControls clients={Database.getAllClients()} loadClientAddress={v => this.loadClientAddress(v)} />
+        <InvoiceControls clients={Database.getAllClients()} loadClientAddress={v => this.loadClientAddress(v)} saveInvoice={() => this.saveInvoice()} />
         <Invoice {...{ from, to, id, date, logo, payment, lineItems, emailAddress, phoneNumber, purchaseOrder }} onChange={v => this.setState(v)} />
       </div>
     );
