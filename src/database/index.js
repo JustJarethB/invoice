@@ -28,6 +28,7 @@ const makeLineItem = lineItem => ({
     // description: makeField(DB_FIELD_TYPE.String, lineItem.description),
     qty: makeField(DB_FIELD_TYPE.Number, lineItem.qty),
     unitPrice: makeField(DB_FIELD_TYPE.Number, lineItem.unitPrice),
+    type: makeField(DB_FIELD_TYPE.Number, lineItem.type)
     // vatRate: makeField(DB_FIELD_TYPE.Number, lineItem.vatRate),
 })
 
