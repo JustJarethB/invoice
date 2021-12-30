@@ -25,6 +25,12 @@ const getAllClients = () => [
         address: new Address("Bobcat TV", "12 Roundmead Close\nLoughton\nEssex", "IG10 1QD")
 
     },
+    {
+        displayName: "ESS",
+        defaultTerms: null,
+        address: new Address("ESS Hire (2016) Ltd", "7 Paynes Park\nHitchin\nHertfordshire", "SG5 1EH")
+
+    },
 ]
 
 const addresses = [
