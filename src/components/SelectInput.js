@@ -8,7 +8,7 @@ export default ({ placeholder = '', value = "", onChange, className = "", prefix
         <div className={`${className} ${(prefix || suffix || true) && 'relative'}`}>
             <div className="flex rounded-lg focus-within:bg-white  focus-within:ring-2 focus-within:ring-gray-300">
                 <Prefix prefix={prefix} />
-                <select disabled={!(onChange && (typeof onChange === "function"))} tabIndex="0" style={{ fontWeight: 'inherit' }} className={`p-1  w-full block bg-transparent outline-none appearance-none ${''}`} {...{ value, placeholder }} onChange={e => onChange(e.currentTarget.value)}>
+                <select disabled={!(onChange && (typeof onChange === "function"))} tabIndex="0" style={{ fontWeight: 'inherit' }} className={`p-1  w-full block bg-transparent outline-none appearance-none ${value ? '' : 'text-gray-400'}`} {...{ value, placeholder }} onChange={e => onChange(e.currentTarget.value)}>
                     {[{ label: "---", value: "", disabled: true }].concat(options).map(({ label, value: v, disabled = false }) => <option disabled={disabled} value={v}>{label}</option>)}
                 </select>
                 <Suffix suffix={suffix} />

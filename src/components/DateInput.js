@@ -7,7 +7,7 @@ export default ({ placeholder = '', value = "", onChange, className = "", prefix
         <div className={`${className} ${(prefix || suffix || true) && 'relative'}`}>
             <div className="flex rounded-lg focus-within:bg-white  focus-within:ring-2 focus-within:ring-gray-300">
                 <Prefix prefix={prefix} />
-                <input type="date" disabled={!(onChange && (typeof onChange === "function"))} tabIndex="0" style={{ fontWeight: 'inherit' }} className={`p-1  w-full block bg-transparent outline-none resize-none ${''}`} {...{ value, placeholder }} onChange={e => onChange(e.currentTarget.value)} rows={rows} />
+                <input type="date" disabled={!(onChange && (typeof onChange === "function"))} tabIndex="0" style={{ fontWeight: 'inherit' }} className={`p-1  w-full block bg-transparent outline-none resize-none ${value ? '' : 'text-gray-400'}`} {...{ value, placeholder }} onChange={e => onChange(e.currentTarget.value)} rows={rows} />
                 <Suffix suffix={suffix} />
             </div>
         </div>
