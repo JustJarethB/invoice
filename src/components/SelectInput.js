@@ -1,15 +1,16 @@
 import React from 'react';
 
 export default ({ placeholder = '', value = "", onChange, className = "", prefix, suffix, options = [] }) => {
+    const optionsToUse = options.map(v => typeof v !== 'string' ? v : ({ label: v, value: v }));
     if (!value) {
-        [{ label: "---", value: "" }].concat(options);
+        optionsToUse.unshift({ label: "---", value: "", disabled: true });
     }
     return (
         <div className={`${className} ${(prefix || suffix || true) && 'relative'}`}>
             <div className="flex rounded-lg focus-within:bg-white  focus-within:ring-2 focus-within:ring-gray-300">
                 <Prefix prefix={prefix} />
                 <select disabled={!(onChange && (typeof onChange === "function"))} tabIndex="0" style={{ fontWeight: 'inherit' }} className={`p-1  w-full block bg-transparent outline-none appearance-none ${value ? '' : 'text-gray-400'}`} {...{ value, placeholder }} onChange={e => onChange(e.currentTarget.value)}>
-                    {[{ label: "---", value: "", disabled: true }].concat(options).map(({ label, value: v, disabled = false }) => <option disabled={disabled} value={v}>{label}</option>)}
+                    {optionsToUse.map(({ label, value: v, disabled = false }) => <option disabled={disabled} value={v}>{label}</option>)}
                 </select>
                 <Suffix suffix={suffix} />
             </div>
