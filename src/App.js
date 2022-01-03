@@ -5,6 +5,7 @@ import InvoiceControls from 'components/InvoiceControls';
 import Database from 'Database';
 import { newLine } from 'utils'
 
+const isoDate = d => d.toISOString().slice(0, 10);;
 
 class App extends React.PureComponent {
   constructor() {
@@ -14,7 +15,7 @@ class App extends React.PureComponent {
       from: Database.getDefaultAddress(),
       to: {},
       id: `${now.getTime()}`.substring(0, 10),
-      date: now.toLocaleDateString(),
+      date: isoDate(now),
       logo: { url: "//cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png" },
       lineItems: [newLine()],
       purchaseOrder: '---',

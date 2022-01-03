@@ -1,5 +1,6 @@
 import React from 'react';
 import TextInput from 'components/TextInput';
+import DateInput from 'components/DateInput';
 
 export default ({ id, date, purchaseOrder, onChange }) => (
     <div className="p-2">
@@ -10,7 +11,7 @@ export default ({ id, date, purchaseOrder, onChange }) => (
             </div>
             <div className="flex items-center">
                 <p className="font-bold px-2 whitespace-nowrap">Tax Date</p>
-                <TextInput className="w-full" value={date} onChange={v => onChange({ date: v })} />
+                <DateInput className="w-full" value={date} onChange={v => onChange({ date: v })} />
             </div>
             <div className="flex items-center">
                 <p className="font-bold px-2 whitespace-nowrap">PO / Reference</p>

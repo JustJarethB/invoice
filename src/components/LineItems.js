@@ -1,5 +1,6 @@
 import React from "react";
 import TextInput from "components/TextInput";
+import DateInput from "components/DateInput";
 // import SelectInput from "components/SelectInput";
 
 import { ensureFutureCurrency, formatCurrency } from 'utils';
@@ -29,7 +30,7 @@ export default ({ data, onChange }) => (
 const LineItem = ({ index, item = {}, onChange, className }) => (
     <div className={`flex ${index % 2 && "bg-gray-100"} print:text-xs ${className}`} >
         <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" value={item.date} onChange={(v) => onChange({ date: v })} />
+            <DateInput className="w-full font-bold" value={item.date} onChange={(v) => onChange({ date: v })} />
         </div>
         <div className="p-1 print:hidden w-1/12">
             <TextInput className="w-full font-bold" value={item.type} onChange={(v) => onChange({ type: v })} />
