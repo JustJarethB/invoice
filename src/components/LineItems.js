@@ -1,9 +1,16 @@
 import React from "react";
 import TextInput from "components/TextInput";
 import DateInput from "components/DateInput";
+import SelectInput from "components/SelectInput";
 // import SelectInput from "components/SelectInput";
 
 import { ensureFutureCurrency, formatCurrency } from 'utils';
+
+const lineTypeOptions = [
+    { label: 'Service', value: 0 },
+    { label: 'Rental', value: 1 },
+    { label: 'Expense', value: 2 }
+]
 
 // const getVatRates = () => ([{ label: "20", value: .2 }, { label: "5", value: .05 }, { label: "N/A", value: 0 }])
 
@@ -33,7 +40,7 @@ const LineItem = ({ index, item = {}, onChange, className }) => (
             <DateInput className="w-full font-bold" value={item.date} onChange={(v) => onChange({ date: v })} />
         </div>
         <div className="p-1 print:hidden w-1/12">
-            <TextInput className="w-full font-bold" value={item.type} onChange={(v) => onChange({ type: v })} />
+            <SelectInput options={lineTypeOptions} className="w-full font-bold" value={item.type} onChange={(v) => onChange({ type: v })} />
         </div>
         <div className="p-1 w-1/6">
             <TextInput className="w-full font-bold" value={item.ref} onChange={(v) => onChange({ ref: v })} />
