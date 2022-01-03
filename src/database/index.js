@@ -1,7 +1,7 @@
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
 // Set the AWS Region.
-const CONFIG = { region: "us-east-1", apiVersion: '2012-08-10', credentials: { accessKeyId: 'AKIA2HYZON2W53KCINJH', secretAccessKey: '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' } };
+const CONFIG = { region: "us-east-1", apiVersion: '2012-08-10', credentials: { accessKeyId: process.env.REACT_APP_DYNAMO_ACCESS_KEY, secretAccessKey: process.env.REACT_APP_DYNAMO_SECRET_KEY } };
 // Create an Amazon DynamoDB service client object.
 const db = new DynamoDBClient(CONFIG);
 const marshallOptions = { convertClassInstanceToMap: true, removeUndefinedValues: true };
