@@ -12,6 +12,12 @@ const lineTypeOptions = [
     { label: 'Expense', value: 2 }
 ]
 
+const lineUnitOptions = [
+    'Hourly',
+    'Daily',
+    'Consolidated Items'
+]
+
 // const getVatRates = () => ([{ label: "20", value: .2 }, { label: "5", value: .05 }, { label: "N/A", value: 0 }])
 
 export default ({ data, onChange }) => (
@@ -46,7 +52,7 @@ const LineItem = ({ index, item = {}, onChange, className }) => (
             <TextInput className="w-full font-bold" value={item.ref} onChange={(v) => onChange({ ref: v })} />
         </div>
         <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" value={item.name} onChange={(v) => onChange({ name: v })} />
+            <SelectInput options={lineUnitOptions} className="w-full font-bold" value={item.name} onChange={(v) => onChange({ name: v })} />
         </div>
         <div className="p-1 w-1/12">
             <TextInput className="w-full font-bold" value={item.qty} onChange={(v) => onChange({ qty: v })} />
