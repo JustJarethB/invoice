@@ -85,7 +85,8 @@ const getAllClients = () => [
 
 const addresses = [
     new Address('Jareth Bower', "26 Hilton Avenue", "Dunstable", "Bedfordshire", "LU6 3QF"),
-    new Address('Jareth Bower', "15 Langland Court", "Northwood", "Hillingdon", "HA6 2NH")
+    new Address('Jareth Bower', "15 Langland Court", "Northwood", "Hillingdon", "HA6 2NH"),
+    new Address('Jareth Bower', "London School of Theology", "Northwood", "Hillingdon", "HA6 2UW"),
 ]
 const getDefaultAddress = () => addresses[1]
 
