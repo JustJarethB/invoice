@@ -1,8 +1,8 @@
 import React from 'react';
-import TextInput from 'components/TextInput';
-import Address from 'components/Address';
-import LineItems from 'components/LineItems';
-import InvoiceMeta from 'components/InvoiceMeta';
+import { TextInput } from 'components/Inputs';
+import { Address, LineItems, InvoiceMeta } from 'components';
+// import LineItems from 'components/LineItems';
+// import InvoiceMeta from 'components/InvoiceMeta';
 
 import { formatCurrency, newLine } from 'utils';
 

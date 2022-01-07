@@ -1,6 +1,5 @@
 import React from 'react';
-import TextInput from 'components/TextInput';
-import DateInput from 'components/DateInput';
+import { TextInput, DateInput } from 'components/Inputs';
 
 export default ({ id, date, purchaseOrder, onChange }) => (
     <div className="p-2">

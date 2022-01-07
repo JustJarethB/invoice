@@ -1,8 +1,5 @@
 import React from "react";
-import TextInput from "components/TextInput";
-import DateInput from "components/DateInput";
-import SelectInput from "components/SelectInput";
-// import SelectInput from "components/SelectInput";
+import { TextInput, DateInput, SelectInput } from "components/Inputs";
 
 import { ensureFutureCurrency, formatCurrency } from 'utils';
 

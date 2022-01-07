@@ -1,5 +1,5 @@
 import React from 'react';
-import TextInput from 'components/TextInput';
+import { TextInput } from 'components/Inputs';
 
 export default ({ address, onChange, className = 0, title }) => (
     <div className={` w-full md:w-1/2 ${className} p-2`}>
