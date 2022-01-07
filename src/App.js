@@ -1,6 +1,7 @@
 import React from 'react';
-import Invoice from 'components/Invoice';
-import InvoiceControls from 'components/InvoiceControls';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HomePage, InvoicePage, ListingPage } from 'pages';
+import Header from 'components/Header'
 
 import Database from 'Database';
 import { newLine } from 'utils'
@@ -50,6 +51,10 @@ class App extends React.PureComponent {
     this.setState({ to: Database.getAllClients()[index].address })
   }
 
+  // loadAllInvoices() {
+  //   this.setState({invoices:Database.getAllInvoices()})
+  // }
+
   render() {
     const {
       id,
@@ -63,11 +68,24 @@ class App extends React.PureComponent {
       from,
       to,
     } = this.state;
+    const nav = [
+      { name: 'Dashboard', href: '/', element: <HomePage /> },
+      { name: 'Listing', href: '/invoices', element: <ListingPage /> },
+      { name: 'Projects', href: '/', element: null },
+      { name: 'New Invoice', href: '/invoice/new', element: <InvoicePage {...{ from, to, id, date, logo, payment, lineItems, emailAddress, phoneNumber, purchaseOrder }} clients={Database.getAllClients()} loadClientAddress={v => this.loadClientAddress(v)} saveInvoice={() => this.saveInvoice()} onChange={v => this.setState(v)} /> },
+    ]
     return (
-      <div className="App bg-gray-50">
-        <InvoiceControls clients={Database.getAllClients()} loadClientAddress={v => this.loadClientAddress(v)} saveInvoice={() => this.saveInvoice()} />
-        <Invoice {...{ from, to, id, date, logo, payment, lineItems, emailAddress, phoneNumber, purchaseOrder }} onChange={v => this.setState(v)} />
-      </div>
+      <Router>
+
+        <div className="App bg-gray-50">
+          <Header navigation={nav} />
+          <Routes>
+            {nav.map(route => (<Route path={route.href} element={route.element} />))}
+            {/* <Route path="/" element={<InvoicePage {...{ from, to, id, date, logo, payment, lineItems, emailAddress, phoneNumber, purchaseOrder }} clients={Database.getAllClients()} loadClientAddress={v => this.loadClientAddress(v)} saveInvoice={() => this.saveInvoice()} onChange={v => this.setState(v)} />} />
+            <Route path="/invoices" element={<ListingPage />} /> */}
+          </Routes>
+        </div>
+      </Router>
     );
   }
 }
