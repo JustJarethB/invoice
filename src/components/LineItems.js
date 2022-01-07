@@ -31,7 +31,7 @@ export default ({ data, onChange }) => (
             <div className="p-2 w-1/6 font-bold">Total</div>
         </div>
         <div className="ring-4 ring-gray-300 rounded-sm">
-            {data.map((l, i) => <LineItem index={i} item={l} onChange={d => onChange({ id: i, data: d })} className={(i === data.length - 1) ? "print:hidden" : ""} />)}
+            {data.map((l, i) => <LineItem key={JSON.stringify(l)} index={i} item={l} onChange={d => onChange({ id: i, data: d })} className={(i === data.length - 1) ? "print:hidden" : ""} />)}
         </div>
     </div>
 )

@@ -80,7 +80,7 @@ class App extends React.PureComponent {
         <div className="App bg-gray-50">
           <Header navigation={nav} />
           <Routes>
-            {nav.map(route => (<Route path={route.href} element={route.element} />))}
+            {nav.map(route => (<Route key={route.name} path={route.href} element={route.element} />))}
             {/* <Route path="/" element={<InvoicePage {...{ from, to, id, date, logo, payment, lineItems, emailAddress, phoneNumber, purchaseOrder }} clients={Database.getAllClients()} loadClientAddress={v => this.loadClientAddress(v)} saveInvoice={() => this.saveInvoice()} onChange={v => this.setState(v)} />} />
             <Route path="/invoices" element={<ListingPage />} /> */}
           </Routes>
