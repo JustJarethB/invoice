@@ -16,19 +16,21 @@ const lineUnitOptions = [
 ]
 
 // const getVatRates = () => ([{ label: "20", value: .2 }, { label: "5", value: .05 }, { label: "N/A", value: 0 }])
-
+const defaultHeaderClasses = "p-2 table-cell font-bold"
+const defaultOuterCellClasses = "p-1 table-cell"
+const defaultInnerCellClasses = "w-full font-bold"
 const LineItems = ({ data, onChange }) => (
     <div className="p-2 table">
         <div className="pb-2 table-row">
-            <div className="p-2 table-cell font-bold">Service Date</div>
-            <div className="p-2 table-cell print:hidden font-bold">Type</div>
-            <div className="p-2 table-cell font-bold">Ref</div>
-            <div className="p-2 table-cell font-bold">Unit</div>
-            <div className="p-2 table-cell font-bold">Quantity</div>
-            <div className="p-2 table-cell font-bold">Unit Price</div>
-            {/* <div className="p-2 table-cell font-bold">VAT Rate</div>
-            <div className="p-2 table-cell font-bold">VAT</div> */}
-            <div className="p-2 table-cell font-bold">Total</div>
+            <div className={defaultHeaderClasses}>Service Date</div>
+            <div className={`${defaultHeaderClasses} print:hidden`}>Type</div>
+            <div className={defaultHeaderClasses}>Ref</div>
+            <div className={defaultHeaderClasses}>Unit</div>
+            <div className={defaultHeaderClasses}>Quantity</div>
+            <div className={defaultHeaderClasses}>Unit Price</div>
+            {/* <div className={defaultHeaderClasses}>VAT Rate</div>
+            <div className={defaultHeaderClasses}>VAT</div> */}
+            <div className={defaultHeaderClasses}>Total</div>
         </div>
         <div className="ring-4 ring-gray-300 rounded-sm table-row-group">
             {/* Need to give key that doesn't change with UserInput, can't use index either */}
@@ -40,26 +42,26 @@ const LineItems = ({ data, onChange }) => (
 
 const LineItem = ({ index, item = {}, onChange, className }) => (
     <div className={`flex ${index % 2 && "bg-gray-100"} table-row print:text-xs ${className}`} >
-        <div className="p-1 table-cell ">
-            <DateInput className="w-full font-bold" value={item.date} onChange={(v) => onChange({ date: v })} />
+        <div className={defaultOuterCellClasses}>
+            <DateInput className={defaultInnerCellClasses} value={item.date} onChange={(v) => onChange({ date: v })} />
         </div>
-        <div className="p-1 table-cell print:hidden ">
-            <SelectInput options={lineTypeOptions} className="w-full font-bold" value={item.type} onChange={(v) => onChange({ type: v })} />
+        <div className={`${defaultOuterCellClasses} print:hidden`}>
+            <SelectInput options={lineTypeOptions} className={defaultInnerCellClasses} value={item.type} onChange={(v) => onChange({ type: v })} />
         </div>
-        <div className="p-1 table-cell ">
-            <TextInput className="w-full font-bold" value={item.ref} onChange={(v) => onChange({ ref: v })} />
+        <div className={defaultOuterCellClasses}>
+            <TextInput className={defaultInnerCellClasses} value={item.ref} onChange={(v) => onChange({ ref: v })} />
         </div>
-        <div className="p-1 table-cell ">
-            <SelectInput options={lineUnitOptions} className="w-full font-bold" value={item.name} onChange={(v) => onChange({ name: v })} />
+        <div className={defaultOuterCellClasses}>
+            <SelectInput options={lineUnitOptions} className={defaultInnerCellClasses} value={item.name} onChange={(v) => onChange({ name: v })} />
         </div>
-        <div className="p-1 table-cell ">
-            <TextInput className="w-full font-bold" value={item.qty} onChange={(v) => onChange({ qty: v })} />
+        <div className={defaultOuterCellClasses}>
+            <TextInput className={defaultInnerCellClasses} value={item.qty} onChange={(v) => onChange({ qty: v })} />
         </div>
-        <div className="p-1 table-cell ">
-            <TextInput className="w-full font-bold" prefix="£" value={(item.unitPrice)} onChange={(v) => onChange({ unitPrice: ensureFutureCurrency(v) })} />
+        <div className={defaultOuterCellClasses}>
+            <TextInput className={defaultInnerCellClasses} prefix="£" value={(item.unitPrice)} onChange={(v) => onChange({ unitPrice: ensureFutureCurrency(v) })} />
         </div>
-        <div className="p-1 table-cell ">
-            <TextInput className="w-full font-bold" prefix="£" value={formatCurrency(item.qty * item.unitPrice) || undefined} />
+        <div className={defaultOuterCellClasses}>
+            <TextInput className={defaultInnerCellClasses} prefix="£" value={formatCurrency(item.qty * item.unitPrice) || undefined} />
         </div>
     </div>
 )
