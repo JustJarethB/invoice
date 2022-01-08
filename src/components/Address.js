@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInput } from 'components/Inputs';
 
-export default ({ address, onChange, className = 0, title }) => (
+const Address = ({ address, onChange, className = 0, title }) => (
     <div className={` w-full md:w-1/2 ${className} p-2`}>
         <div className="w-full ring-4 ring-gray-300 rounded-sm p-2">
             <h2>{title}</h2>
@@ -13,3 +13,4 @@ export default ({ address, onChange, className = 0, title }) => (
         </div>
     </div>
 )
+export default Address;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInput, DateInput } from 'components/Inputs';
 
-export default ({ id, date, purchaseOrder, onChange }) => (
+const InvoiceMeta = ({ id, date, purchaseOrder, onChange }) => (
     <div className="p-2">
         <div className="p-2 w-full ring-4 ring-gray-300 rounded-sm">
             <div className="flex items-center">
@@ -20,3 +20,4 @@ export default ({ id, date, purchaseOrder, onChange }) => (
     </div>
 
 )
+export default InvoiceMeta

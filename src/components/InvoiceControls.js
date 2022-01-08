@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/solid';
 
-export default ({ clients, loadClientAddress, saveInvoice }) => (
+const InvoiceControls = ({ clients, loadClientAddress, saveInvoice }) => (
     <div className="print:hidden sticky top-0 bg-gray-50 shadow-sm z-10">
         <div className="container mx-auto">
             <div className="w-full flex justify-end">
@@ -53,3 +53,5 @@ class DropdownButton extends React.PureComponent {
         )
     }
 }
+
+export default InvoiceControls

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ placeholder = '', value = "", onChange, className = "", prefix, suffix, options = [] }) => {
+const SelectInput = ({ placeholder = '', value = "", onChange, className = "", prefix, suffix, options = [] }) => {
     const optionsToUse = options.map(v => typeof v !== 'string' ? v : ({ label: v, value: v }));
     if (!value) {
         optionsToUse.unshift({ label: "---", value: "", disabled: true });
@@ -34,3 +34,5 @@ const Suffix = ({ suffix }) => {
         </div>
     )
 }
+
+export default SelectInput

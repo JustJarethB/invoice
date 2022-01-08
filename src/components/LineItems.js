@@ -17,7 +17,7 @@ const lineUnitOptions = [
 
 // const getVatRates = () => ([{ label: "20", value: .2 }, { label: "5", value: .05 }, { label: "N/A", value: 0 }])
 
-export default ({ data, onChange }) => (
+const LineItems = ({ data, onChange }) => (
     <div className="p-2">
         <div className="pb-2 flex">
             <div className="p-2 w-1/6 font-bold">Service Date</div>
@@ -71,3 +71,4 @@ const LineItem = ({ index, item = {}, onChange, className }) => (
         </div>
     </div>
 )
+export default LineItems

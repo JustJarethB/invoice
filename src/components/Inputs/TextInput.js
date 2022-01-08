@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ placeholder = '', value = "", onChange, className = "", prefix, suffix }) => {
+const TextInput = ({ placeholder = '', value = "", onChange, className = "", prefix, suffix }) => {
     const rex = (`${value}`.match(new RegExp(/\n/g)) || []).length;
     const rows = rex + 1;
     return (
@@ -30,3 +30,4 @@ const Suffix = ({ suffix }) => {
         </div>
     )
 }
+export default TextInput

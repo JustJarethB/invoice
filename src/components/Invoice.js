@@ -6,7 +6,7 @@ import { Address, LineItems, InvoiceMeta } from 'components';
 
 import { formatCurrency, newLine } from 'utils';
 
-export default class extends React.PureComponent {
+class Invoice extends React.PureComponent {
     // constructor() {
     //     super();
     // }
@@ -120,3 +120,5 @@ const StandardField = ({ title, prefix, suffix, value, onChange, className, pare
     </div>
 
 )
+
+export default Invoice;
