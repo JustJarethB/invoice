@@ -31,7 +31,8 @@ const LineItems = ({ data, onChange }) => (
             <div className="p-2 w-1/6 font-bold">Total</div>
         </div>
         <div className="ring-4 ring-gray-300 rounded-sm">
-            {data.map((l, i) => <LineItem key={JSON.stringify(l)} index={i} item={l} onChange={d => onChange({ id: i, data: d })} className={(i === data.length - 1) ? "print:hidden" : ""} />)}
+            {/* Need to give key that doesn't change with UserInput, can't use index either */}
+            {data.map((l, i) => <LineItem index={i} item={l} onChange={d => onChange({ id: i, data: d })} className={(i === data.length - 1) ? "print:hidden" : ""} />)}
         </div>
     </div>
 )
@@ -57,15 +58,6 @@ const LineItem = ({ index, item = {}, onChange, className }) => (
         <div className="p-1 w-1/6">
             <TextInput className="w-full font-bold" prefix="£" value={(item.unitPrice)} onChange={(v) => onChange({ unitPrice: ensureFutureCurrency(v) })} />
         </div>
-        {/* <div className="p-1 w-1/6">
-            <SelectInput className="w-full font-bold" prefix="%" value={item.vatRate} options={getVatRates()} onChange={(v) => onChange({ vatRate: v })} />
-        </div> */}
-        {/* <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" prefix="%" value={item.vatRate * 100 || undefined} onChange={(v) => onChange({ vatRate: v / 100 })} />
-        </div> */}
-        {/* <div className="p-1 w-1/6">
-            <TextInput className="w-full font-bold" prefix="£" value={formatCurrency(item.qty * item.unitPrice * item.vatRate) || undefined} />
-        </div> */}
         <div className="p-1 w-1/6">
             <TextInput className="w-full font-bold" prefix="£" value={formatCurrency(item.qty * item.unitPrice) || undefined} />
         </div>
