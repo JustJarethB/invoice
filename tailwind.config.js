@@ -5,12 +5,13 @@ module.exports = {
     extend: {
       screens: {
         'print': { 'raw': 'print' },
+        'screen': { 'raw': 'screen' }
       }
     },
   },
   variants: {
     extend: {
-      ringColor: ['responsive', 'dark', 'focus-within', 'focus', 'hover', 'group-hover']
+      ringColor: ['responsive', 'dark', 'focus-within', 'focus', 'hover', 'group-hover'],
     },
   },
   plugins: [],
