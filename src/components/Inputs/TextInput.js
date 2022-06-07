@@ -6,7 +6,7 @@ const TextInput = ({ placeholder = '', value = "", onChange, className = "", pre
     const rows = rex + 1;
     return (
         <InputWrapper {...{ className, prefix, suffix }}>
-            <textarea disabled={!(onChange && (typeof onChange === "function"))} tabIndex="0" style={{ fontWeight: 'inherit' }} className={`p-1  w-full block bg-transparent outline-none resize-none ${''}`} {...{ value, placeholder }} onChange={e => onChange(e.currentTarget.value)} rows={rows}>{value}</textarea>
+            <textarea disabled={!(onChange && (typeof onChange === "function"))} tabIndex="0" style={{ fontWeight: 'inherit' }} className={`p-1  w-full block bg-transparent outline-none print:placeholder-transparent resize-none ${''}`} {...{ value, placeholder }} onChange={e => onChange(e.currentTarget.value)} rows={rows}>{value}</textarea>
         </InputWrapper>
     )
 

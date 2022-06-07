@@ -6,7 +6,7 @@ const DateInput = ({ placeholder = '', value = "", onChange, className = "", pre
     const rows = rex + 1;
     return (
         <InputWrapper {...{ className, prefix, suffix }}>
-            <input type="date" disabled={!(onChange && (typeof onChange === "function"))} tabIndex="0" style={{ fontWeight: 'inherit' }} className={`p-1  w-full block bg-transparent outline-none resize-none ${value ? '' : 'text-gray-400'}`} {...{ value, placeholder }} onChange={e => onChange(e.currentTarget.value)} rows={rows} />
+            <input type="date" disabled={!(onChange && (typeof onChange === "function"))} tabIndex="0" style={{ fontWeight: 'inherit' }} className={`p-1  w-full block bg-transparent outline-none resize-none ${value ? '' : 'text-gray-400 print:hidden'}`} {...{ value, placeholder }} onChange={e => onChange(e.currentTarget.value)} rows={rows} />
         </InputWrapper>
     )
 
